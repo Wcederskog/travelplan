@@ -7,6 +7,8 @@ services:
       - dbnet
     depends_on:
       - postgres
+    ports:
+      - 3000:3000
   postgres:
     image: postgres:latest
     restart: always
@@ -20,6 +22,7 @@ services:
       - travel-plan:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+    
   web:
     image: nginx:latest
     ports:
