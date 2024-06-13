@@ -1,0 +1,63 @@
+// schema.prisma
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL") // uses connection pooling
+}
+
+model User {
+    id            String          @id @default(cuid())
+    name          String
+    email         String          @unique
+    password      String
+    ownedGroups   Group[]
+    groups        UsersOnGroups[]
+    activeGroupId String?
+    destinations  Destination[]
+    color         String?
+    createdAt     DateTime        @default(now()) @map(name: "created_at")
+
+    @@map(name: "users")
+}
+
+model Group {
+    id           String          @id @default(cuid())
+    admin        User            @relation(fields: [adminId], references: [id], onDelete: Cascade)
+    adminId      String
+    name         String
+    description  String
+    users        UsersOnGroups[]
+    destinations Destination[]
+    createdAt    DateTime        @default(now()) @map(name: "created_at")
+}
+
+model UsersOnGroups {
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    groupId   String
+    group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now()) @map(name: "created_at")
+
+    @@id([userId, groupId])
+}
+
+model Destination {
+    id          String    @id @default(cuid())
+    mandatory   Boolean
+    groupEvent  Boolean
+    price       Int
+    dateFrom    DateTime
+    dateTo      DateTime?
+    description String
+    title       String
+    lat         Float
+    lng         Float
+    user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId      String
+    group       Group?    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+    groupId     String?
+}

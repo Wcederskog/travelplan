@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'leaflet/dist/leaflet.css';
+@import '@mantine/core/styles.css';
+@import '@mantine/dates/styles.css';
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: #ffffff;
+  font-family: "nunito";
+  
+}
+@layer base {
+  @font-face {
+    font-family: "nunito";
+    src: url(../assets/fonts/Nunito-Regular.ttf) format("ttf");
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: "nunito";
+    src: url(../assets/fonts/Nunito-SemiBold.ttf);
+    font-weight: 600;
+  }
+  @font-face {
+    font-family: "nunito";
+    src: local("Nunito"), url(../assets/fonts/Nunito-Bold.ttf);
+    font-weight: 700;
+  }
+}
+h1 {
+  @apply text-7xl font-semibold;
+}
+h2 {
+  @apply text-5xl;
+}
+h3 {
+  @apply text-4xl
+  font-semibold;
+}
+h4 {
+  @apply text-2xl
+  font-semibold;  
+}
+h5 {
+  @apply text-lg lg:text-xl
+  font-semibold;
+}
+
+.button-default {
+  @apply border-2 border-brand-purple-500 py-2 px-4 rounded-full text-black hover:bg-gradient-to-t from-brand-purple-500 to-brand-purple-300 hover:text-white w-fit transition-colors duration-200
+}
+.button-reversed {
+  @apply py-2 px-4 rounded-full bg-gradient-to-t from-brand-purple-500 to-brand-purple-300 text-white w-fit hover:from-brand-purple-300 hover:to-brand-purple-300 shadow-md transition-colors duration-200
+}
+
+.drop-down-triangle {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  margin-left: 44px;
+  width: 44px;
+  height: 23px;
+  z-index: 2;
+  transform: translateX(10%);
+  background-color: #F3F4F6;
+}
+
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  transition: all 0.3s;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  row-gap: 8px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    transition: all 0.3s;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    grid-gap: 16px;
+    max-width: 1500px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
