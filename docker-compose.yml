@@ -1,0 +1,41 @@
+version: '3.9'
+services:
+  app:
+    image: app:latest
+    networks:
+      - appnet
+      - dbnet
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=SecurePassword123
+      - POSTGRES_DB=travel-plan
+    networks:
+      - dbnet
+    volumes:
+      - travel-plan:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  web:
+    image: nginx:latest
+    ports:
+      - 8000:80
+    networks:
+      - appnet
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+
+volumes:
+  travel-plan:
+
+networks:
+  dbnet:
+    driver: bridge
+  appnet:
+    driver: bridge
