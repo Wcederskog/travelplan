@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import { useDebouncedValue } from "@mantine/hooks";
 import ReactDOMServer from "react-dom/server";
-import { DivIcon, Icon } from "leaflet";
+import { DivIcon } from "leaflet";
 import IconMarker, { IconMarkerVariant } from "./IconMarker";
 import { useDisclosure } from "@mantine/hooks";
 import { Destination, OverpassElement } from "../../../types";
@@ -152,40 +152,40 @@ const MapContainerContent: React.FC<MapContainerContentProps> = ({
           let iconColor;
           switch (attraction.tags.tourism) {
             case "sights":
-              iconVariant = "camera-retro" as IconMarkerVariant;
-              iconColor = "blue";
+              iconVariant = "street-view" as IconMarkerVariant;
+              iconColor = "#1E90FF";
               break;
             case "museum":
               iconVariant = "museum" as IconMarkerVariant;
-              iconColor = "brown";
+              iconColor = "#8B4513";
               break;
             case "artwork":
               iconVariant = "palette" as IconMarkerVariant;
-              iconColor = "red";
+              iconColor = "#FF6347";
               break;
             case "hotel":
               iconVariant = "hotel" as IconMarkerVariant;
-              iconColor = "purple";
+              iconColor = "#800080";
               break;
             case "hostel":
               iconVariant = "hostel" as IconMarkerVariant;
-              iconColor = "green";
+              iconColor = "#3CB371";
               break;
             case "gallery":
               iconVariant = "gallery" as IconMarkerVariant;
-              iconColor = "pink";
+              iconColor = "#FF69B4";
               break;
             case "attraction":
               iconVariant = "attraction" as IconMarkerVariant;
-              iconColor = "teal";
+              iconColor = "#20B2AA";
               break;
             case "aquarium":
               iconVariant = "aquarium" as IconMarkerVariant;
-              iconColor = "blue";
+              iconColor = "#4682B4";
               break;
             default:
               iconVariant = "camera-retro" as IconMarkerVariant;
-              iconColor = "orange";
+              iconColor = "#FFA500";
               break;
           }
           const iconHtml = ReactDOMServer.renderToString(
@@ -200,7 +200,6 @@ const MapContainerContent: React.FC<MapContainerContentProps> = ({
                   className: "bg-transparent",
                   html: iconHtml,
                   iconSize: map.getZoom() < 14 ? [14, 14] : [20, 20],
-                  // iconAnchor: [12, 41],
                 })
               }
             >
