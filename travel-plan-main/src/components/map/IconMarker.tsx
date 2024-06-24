@@ -24,8 +24,7 @@ export type IconMarkerVariant =
   | "aquarium"
   | "attraction"
   | "gpt"
-  | "user"
-  | "street-view";
+  | "user";
 
 interface IconProps {
   variant: IconMarkerVariant;
@@ -41,7 +40,7 @@ const IconMarker: React.FC<IconProps> = ({
   let icon;
   switch (variant) {
     case "sights":
-      icon = faCameraRetro;
+      icon = faStreetView;
       break;
     case "museum":
       icon = faBuildingColumns;
@@ -69,9 +68,6 @@ const IconMarker: React.FC<IconProps> = ({
       break;
     case "user":
       icon = faUser;
-      break;
-    case "street-view":
-      icon = faStreetView;
       break;
 
     default:
