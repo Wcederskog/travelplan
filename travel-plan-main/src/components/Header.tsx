@@ -13,7 +13,6 @@ import { Modal, Popover, Select } from "@mantine/core";
 import AccountModal from "./account/AccountModal";
 import { useQuery } from "@tanstack/react-query";
 import { Group } from "@prisma/client";
-import { cookies } from "next/headers";
 
 interface HeaderProps {}
 
@@ -308,6 +307,17 @@ const Header: React.FC<HeaderProps> = () => {
                   >
                     <Icon variant="user" size={20} color="gray-300" />
                     Active group
+                    {loginContext.activeGroupId !== "solo" && (
+                      <>
+                        {" -"} (
+                        {
+                          groups?.find(
+                            (group) => group.id === loginContext.activeGroupId
+                          )?.name
+                        }
+                        )
+                      </>
+                    )}
                   </li>
                 )}
                 <div className="border-b border-solid my-2 border-gray-300"></div>

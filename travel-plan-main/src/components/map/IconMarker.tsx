@@ -14,7 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export type IconMarkerVariant =
-  | "sights"
+  | "viewpoint"
   | "museum"
   | "artwork"
   | "camera-retro"
@@ -39,7 +39,7 @@ const IconMarker: React.FC<IconProps> = ({
 }) => {
   let icon;
   switch (variant) {
-    case "sights":
+    case "viewpoint":
       icon = faStreetView;
       break;
     case "museum":

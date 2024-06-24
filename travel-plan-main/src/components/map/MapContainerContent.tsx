@@ -139,7 +139,7 @@ const MapContainerContent: React.FC<MapContainerContentProps> = ({
       />
 
       {filteredOverpassData
-        .slice(1, 50)
+        .slice(1, 70)
         .filter(
           (item) =>
             !destinations.some(
@@ -151,8 +151,8 @@ const MapContainerContent: React.FC<MapContainerContentProps> = ({
           let iconVariant;
           let iconColor;
           switch (attraction.tags.tourism) {
-            case "sights":
-              iconVariant = "street-view" as IconMarkerVariant;
+            case "viewpoint":
+              iconVariant = "viewpoint" as IconMarkerVariant;
               iconColor = "#1E90FF";
               break;
             case "museum":
@@ -160,7 +160,7 @@ const MapContainerContent: React.FC<MapContainerContentProps> = ({
               iconColor = "#8B4513";
               break;
             case "artwork":
-              iconVariant = "palette" as IconMarkerVariant;
+              iconVariant = "artwork" as IconMarkerVariant;
               iconColor = "#FF6347";
               break;
             case "hotel":
@@ -245,18 +245,21 @@ const MapContainerContent: React.FC<MapContainerContentProps> = ({
         >
           <Popup>
             <h5 className="text-center">{destination.title}</h5>
-            <br /> {destination.description}.
-            {destination.dateFrom && (
-              <div className="flex flex-row items-center justify-center text-brand-purple-400">
-                <p>{moment(destination.dateFrom).format("HH:mm")}</p>
-                {destination.dateTo && (
-                  <>
-                    <span> - </span>
-                    <p>{moment(destination.dateTo).format("HH:mm")}</p>
-                  </>
-                )}
-              </div>
-            )}
+            <br /> {destination.description}
+            <div className="flex flex-row justify-between">
+              {destination?.user && <p>Created by: {destination.user.name}</p>}
+              {destination.dateFrom && (
+                <div className="flex flex-row items-center justify-center text-brand-purple-400">
+                  <p>{moment(destination.dateFrom).format("HH:mm")}</p>
+                  {destination.dateTo && (
+                    <>
+                      <span> - </span>
+                      <p>{moment(destination.dateTo).format("HH:mm")}</p>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
           </Popup>
         </Marker>
       ))}
