@@ -23,15 +23,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { query } = req.body;
 
   if (!query) {
-    res.status(400).json({ error: "Query is required" });
-    return;
+    return res.status(400).json({ error: "Query is required" });
   }
 
   try {
     const data = await fetchOverpassData(query);
-    res.status(200).json(data);
+    return res.status(200).json(data);
   } catch (error) {
     console.error("Error fetching Overpass data:", error);
-    res.status(500).json({ error: error });
+    return res.status(500).json({ error: error });
   }
 };

@@ -38,10 +38,10 @@ export default async function handler(
       return res.status(201).json(group);
     } catch (error) {
       console.error("Error creating group:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   } else {
     res.setHeader("Allow", ["POST"]);
-    res.status(405).json({ error: `Method ${req.method} not allowed` });
+    return res.status(405).json({ error: `Method ${req.method} not allowed` });
   }
 }

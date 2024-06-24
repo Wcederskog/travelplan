@@ -12,13 +12,13 @@ export default async function handler(
         where: { id: req.headers["user_id"] as string },
         data: { color, name },
       });
-      res.status(200).json(updatedUser);
+      return res.status(200).json(updatedUser);
     } catch (error) {
       console.error("Error updating user color:", error);
-      res.status(500).json({ error: "Error updating user color" });
+      return res.status(500).json({ error: "Error updating user color" });
     }
   } else {
     res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

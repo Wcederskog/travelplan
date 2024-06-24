@@ -14,13 +14,13 @@ export default async function handler(
           activeGroupId: groupId,
         },
       });
-      res.status(200).json(updatedUser);
+      return res.status(200).json(updatedUser);
     } catch (error) {
       console.error("Error updating user:", error);
-      res.status(500).json({ error: "Error updating user" });
+      return res.status(500).json({ error: "Error updating user" });
     }
   } else {
     res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

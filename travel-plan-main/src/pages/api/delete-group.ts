@@ -17,13 +17,13 @@ export default async function handler(
         },
       });
 
-      res.status(200).json("Group deleted successfully");
+      return res.status(200).json("Group deleted successfully");
     } catch (error) {
       console.error("Error deleting group:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   } else {
     res.setHeader("Allow", ["DELETE"]);
-    res.status(405).json({ error: `Method ${req.method} not allowed` });
+    return res.status(405).json({ error: `Method ${req.method} not allowed` });
   }
 }

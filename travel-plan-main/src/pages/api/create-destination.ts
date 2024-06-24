@@ -40,14 +40,16 @@ export default async function handler(
           },
         });
         console.log("New destination created:");
-        res.status(200).json("Destination created successfully");
+        return res.status(200).json("Destination created successfully");
       } catch (error) {
         console.error("Error creating destination:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        return res.status(500).json({ error: "Internal Server Error" });
       }
     } catch {
       res.setHeader("Allow", ["POST"]);
-      res.status(405).json({ error: `Method ${req.method} not allowed` });
+      return res
+        .status(405)
+        .json({ error: `Method ${req.method} not allowed` });
     }
   }
 }

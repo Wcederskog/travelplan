@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../lib/prisma";
-import { revalidatePath } from "next/cache";
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,7 +41,7 @@ export default async function handler(
         },
       });
 
-      res.status(200).json(
+      return res.status(200).json(
         groups.map((group) => ({
           ...group,
           members: group.users.map((user) => ({ ...user.user })),
@@ -50,10 +49,10 @@ export default async function handler(
       );
     } catch (error) {
       console.error("Error fetching groups:", error);
-      res.status(500).json({ error: "Error fetching groups" });
+      return res.status(500).json({ error: "Error fetching groups" });
     }
   } else {
     res.setHeader("Allow", ["GET"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

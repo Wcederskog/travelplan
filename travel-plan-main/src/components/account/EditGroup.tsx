@@ -67,6 +67,7 @@ const EditGroup: React.FC<EditGroupProps> = ({ setAccountTab, group }) => {
       body: JSON.stringify({ groupId: group?.id }),
     });
     if (response.ok) {
+      queryClient.invalidateQueries({ queryKey: ["groups"] });
       setAccountTab("groups");
     } else {
       const data = await response.json();

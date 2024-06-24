@@ -31,13 +31,13 @@ export default async function handler(
           dateTo: dateTo,
         },
       });
-      res.status(200).json(updatedDestination);
+      return res.status(200).json(updatedDestination);
     } catch (error) {
       console.error("Error fetching destinations:", error);
-      res.status(500).json({ error: "Error fetching destinations" });
+      return res.status(500).json({ error: "Error fetching destinations" });
     }
   } else {
     res.setHeader("Allow", ["PATCH"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

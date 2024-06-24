@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { revalidatePath } from "next/cache";
 import prisma from "../../../lib/prisma";
 
 export default async function handler(
@@ -32,13 +31,13 @@ export default async function handler(
         },
       });
 
-      res.status(200).json("Group created successfully");
+      return res.status(200).json("Group created successfully");
     } catch (error) {
       console.error("Error creating group:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   } else {
     res.setHeader("Allow", ["PATCH"]);
-    res.status(405).json({ error: `Method ${req.method} not allowed` });
+    return res.status(405).json({ error: `Method ${req.method} not allowed` });
   }
 }
