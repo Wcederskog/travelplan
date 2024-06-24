@@ -10,6 +10,7 @@ import {
   faFishFins,
   faMagicWandSparkles,
   faUser,
+  faStreetView,
 } from "@fortawesome/free-solid-svg-icons";
 
 export type IconMarkerVariant =
@@ -70,7 +71,7 @@ const IconMarker: React.FC<IconProps> = ({
       icon = faUser;
       break;
     case "street-view":
-      icon = faUser;
+      icon = faStreetView;
       break;
 
     default:
